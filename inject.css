@@ -1,0 +1,14 @@
+.ext-hide-vid-btn {
+    color: red;
+    height: 20px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.ext-hide-vid-btn::after {
+    content: 'Hide'
+}
+
+ytd-grid-video-renderer[is-dismissed] {
+    display: none !important;
+}
