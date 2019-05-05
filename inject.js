@@ -7,11 +7,15 @@ document
     .querySelectorAll(VIDEO_SELECTOR)
     .forEach(a => {
         const hideBtn = document.createElement('button');
-        hideBtn.classList = 'ext-hide-vid-btn'; // defined in inject.css
+        hideBtn.innerHTML = '<span>Hide</span>';
+        hideBtn.classList = 'yt-vid-hider-btn'; // defined in inject.css
 
         hideBtn.onclick = (ev => {
 
-            const btn = ev.target;
+            let btn = ev.target;
+            if (ev.target.tagName === 'SPAN')
+                btn = ev.target.parentElement;
+
             const dropdownMenu = btn.parentElement.parentElement.nextSibling.nextSibling;
 
             // Click the three dots to open the menu
@@ -29,7 +33,3 @@ document
 
         a.parentElement.insertBefore(hideBtn, null)
     });
-
-
-
-
