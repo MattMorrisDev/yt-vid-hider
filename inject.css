@@ -1,14 +1,55 @@
-.ext-hide-vid-btn {
-    color: red;
-    height: 20px;
-    width: 100%;
-    cursor: pointer;
-}
-
-.ext-hide-vid-btn::after {
-    content: 'Hide'
-}
-
 ytd-grid-video-renderer[is-dismissed] {
     display: none !important;
+}
+
+
+ytd-grid-video-renderer #video-title.yt-simple-endpoint.ytd-grid-video-renderer {
+    min-height: 3.2rem;
+}
+
+.yt-vid-hider-btn{
+    cursor: pointer;
+    width: calc(100% + var(--ytd-grid-info-container_-_padding-right));
+    margin-top: 10px;
+    background: #dcdcdc;
+    height: 40px;
+	color: rgba(255,255,255,1);
+	transition: all 0.3s;
+	border: 1px solid rgba(255,255,255,0.5);
+	position: relative;	
+	overflow: hidden;
+}
+
+.yt-vid-hider-btn:hover {
+    border: 1px solid black;
+    color: black;
+    font-weight: bold;
+}
+
+.yt-vid-hider-btn span {
+	z-index: 2;	
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	width: 100%;
+	height: 100%;	
+}
+
+.yt-vid-hider-btn::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0;
+	background-color: rgba(255,255,255,0.5);
+	transition: all 0.3s;
+}
+
+.yt-vid-hider-btn:hover::before {
+	opacity: 1;
+	-webkit-transform: skewX(-180deg)  scale(0.5,1);
+	transform: skewX(-180deg)  scale(0.5,1);
 }
