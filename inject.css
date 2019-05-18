@@ -9,7 +9,7 @@ ytd-grid-video-renderer #video-title.yt-simple-endpoint.ytd-grid-video-renderer 
 
 .yt-vid-hider-btn{
     cursor: pointer;
-    width: calc(100% + var(--ytd-grid-info-container_-_padding-right));
+    width: calc(100% + 24px);
     margin-top: 10px;
     background: #dcdcdc;
     height: 40px;
