@@ -1,9 +1,14 @@
 'use strict';
 
-const VIDEO_SELECTOR = 'a#video-title';
+const PROCESSED_VIDEO_ATTRIBUTE = 'has-yt-hider-btn'; 
+const VIDEO_SELECTOR = `a#video-title:not([${PROCESSED_VIDEO_ATTRIBUTE}="1"])`;
 
 
-document
+function addButtonToVideosThatDontHaveOneYet() {
+
+    console.log('Checking...')
+
+    document
     .querySelectorAll(VIDEO_SELECTOR)
     .forEach(a => {
         const hideBtn = document.createElement('button');
@@ -30,6 +35,28 @@ document
 
         });
 
-
+        // Mark this video as processed so our selector doesn't target this video again
+        a.setAttribute(PROCESSED_VIDEO_ATTRIBUTE, '1');
         a.parentElement.insertBefore(hideBtn, null)
     });
+}
+
+
+
+const debounce = (fn, time) => {
+    let timerId;
+  
+    return function() {
+      const functionCall = () => fn.apply(this, arguments);
+      clearTimeout(timerId);
+      timerId = setTimeout(functionCall, time);
+    }
+  }
+
+const debouncedFn = debounce(addButtonToVideosThatDontHaveOneYet, 1000);
+
+// When we scroll down and fetch a new set of videos, we need to add
+// the hide button to those videos also
+const searchResultsContainer = document.querySelector('ytd-section-list-renderer#primary');
+searchResultsContainer.addEventListener('DOMNodeInserted', debouncedFn, false);
+searchResultsContainer.addEventListener('DOMNodeRemoved', debouncedFn, false);
