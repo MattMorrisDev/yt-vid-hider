@@ -6,8 +6,6 @@ const VIDEO_SELECTOR = `a#video-title:not([${PROCESSED_VIDEO_ATTRIBUTE}="1"])`;
 
 function addButtonToVideosThatDontHaveOneYet() {
 
-    console.log('Checking...')
-
     document
     .querySelectorAll(VIDEO_SELECTOR)
     .forEach(a => {
@@ -42,21 +40,20 @@ function addButtonToVideosThatDontHaveOneYet() {
 }
 
 
-
 const debounce = (fn, time) => {
     let timerId;
-  
-    return function() {
-      const functionCall = () => fn.apply(this, arguments);
-      clearTimeout(timerId);
-      timerId = setTimeout(functionCall, time);
+
+    return function () {
+        const functionCall = () => fn.apply(this, arguments);
+        clearTimeout(timerId);
+        timerId = setTimeout(functionCall, time);
     }
-  }
+};
 
 const debouncedFn = debounce(addButtonToVideosThatDontHaveOneYet, 1000);
 
 // When we scroll down and fetch a new set of videos, we need to add
 // the hide button to those videos also
-const searchResultsContainer = document.querySelector('ytd-section-list-renderer#primary');
+const searchResultsContainer = document.querySelector('ytd-section-list-renderer');
 searchResultsContainer.addEventListener('DOMNodeInserted', debouncedFn, false);
 searchResultsContainer.addEventListener('DOMNodeRemoved', debouncedFn, false);
