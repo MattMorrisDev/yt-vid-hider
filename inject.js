@@ -27,7 +27,7 @@ function addButtonToVideosThatDontHaveOneYet() {
             // Click the 'Hide' dropdown menu choice
             setTimeout(() => {
                 // Wait a tick so the popup menu has time to show itself
-                document.querySelectorAll('ytd-popup-container ytd-menu-service-item-renderer')[2].click()
+                document.querySelectorAll('ytd-popup-container ytd-menu-service-item-renderer')[3].click()
             });
 
 
